@@ -56,7 +56,8 @@ fi
 export NUGET_PACKAGES="${CACHE_DIR}/nuget/cache"
 
 echo "run ${PROJECT_FILE}"
-dotnet run $PROJECT_FILE
+dotnet publish $PROJECT_FILE --output ${BUILD_DIR}/heroku_output --configuration Release --runtime linux-x64
+dotnet run ${BUILD_DIR}/heroku_output/discord-bot.dll
 
 if [ ! -f ${BUILD_DIR}/Procfile ]; then
 	cat << EOT >> ${BUILD_DIR}/Procfile
